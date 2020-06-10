@@ -2,4 +2,19 @@
  * Socket Controller
  */
 
-const debug = require('debug')('09-simple-chat:socket_controller');
+const debug = require('debug')('kill-the-virus:socket_controller');
+
+const players = {}
+
+const handleNewPlayer = function(username) {
+    players[this.id] = username;
+    debug(players)
+}
+
+
+module.exports = function(socket) {
+    debug(`Client ${socket.id} connected!`);
+
+    socket.on('newPlayer', handleNewPlayer)
+
+}

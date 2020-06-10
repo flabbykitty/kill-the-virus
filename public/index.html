@@ -11,11 +11,21 @@
 </head>
 <body>
     <div id="app">
+        <div id="register-player">
+            <h1>Kill the virus!</h1>
+            <form id="player-form">
+                <div class="form-group">
+                    <input type="text" id="username" required placeholder="Your name">
+                </div>
+
+                <button type="submit">Play!</button>
+            </form>
+        </div>
 
     </div>
     
 
     <script src="/socket.io/socket.io.js"></script>
-	<script src="/assets/js/chat.js"></script>
+	<script src="/assets/js/game.js"></script>
 </body>
 </html>
