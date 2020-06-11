@@ -15,9 +15,21 @@ document.querySelector('#player-form').addEventListener('submit', e => {
 
 
 socket.on('newGame', (players) => {
-    console.log(players)
+    const player1 = players[socket.id]
+    delete players[socket.id]
+    const player2 = Object.values(players)
+
+    // Fill the players sidebars with relevant info
+    document.querySelector('#player1 h1').innerHTML = player1
+    document.querySelector('#player2 h1').innerHTML = player2
 
     // Remove the register player overlay and show the game display
     document.querySelector('#register-player').classList.add('hide')
     document.querySelector('#game').classList.remove('hide')
+})
+
+
+document.querySelector('#player1 button').addEventListener('click', () => {
+    console.log('clicked!')
+    document.querySelector('#player1 button').innerHTML = 'Ready!'
 })
