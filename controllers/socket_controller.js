@@ -16,6 +16,14 @@ let games = [
 
 let io = null;
 
+const getRandomPosition = () => {
+    return Math.floor(Math.random() * 20) + 1
+}
+
+const getRandomDelay = () => {
+    return Math.floor(Math.random() * (5000 - 1000)) + 1000
+}
+
 
 const handleNewPlayer = function(username) {
     players[this.id] = username;
@@ -52,6 +60,7 @@ const handleReady = function() {
 
     if(game.ready === 2) {
         // start the game
+        io.to(game.room).emit('startGame', getRandomDelay(), getRandomPosition(), getRandomPosition())
     }
 }
 
