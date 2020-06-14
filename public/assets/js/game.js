@@ -27,3 +27,8 @@ socket.on('newGame', (players) => {
     document.querySelector('#register-player').classList.add('hide')
     document.querySelector('#game').classList.remove('hide')
 })
+
+document.querySelector('#player1 button').addEventListener('click', () => {
+    document.querySelector('#player1 button').innerHTML = 'Ready!'
+    socket.emit("ready")
+})
