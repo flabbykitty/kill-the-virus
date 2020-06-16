@@ -1,4 +1,4 @@
-var socket = io();
+let socket = io();
 
 const virusEl = document.querySelector('#virus');
 
@@ -44,11 +44,33 @@ socket.on('startGame', (delay, position1, position2) => {
     virusEl.style.gridColumn = position1;
     virusEl.style.gridRow = position2;
 
-    // after the delay, remove the class hide from the virus, and start the timer
+    // after the delay, remove the class hide from the virus
     setTimeout(() => {
         virusEl.classList.remove('hide');
 
-        // add timer
+        virusEl.removeEventListener('click', clickedFunction)
+        virusEl.addEventListener('click', clickedFunction)
 
     }, delay)
+
+})
+
+const clickedFunction = () => {
+    socket.emit('clicked')
+}
+
+
+socket.on('getPoint', id => {
+    let player = null;
+
+    id === socket.id
+        ? player = 'player2'
+        : player = 'player1'
+    
+    let oldScore = Number(document.querySelector(`#${player}Score`).innerHTML);
+    let newScore = ++oldScore;
+    document.querySelector(`#${player}Score`).innerHTML = newScore;
+
+    // hide the virus
+    virusEl.classList.add('hide')
 })
