@@ -116,6 +116,11 @@
     text-align: center;
 }
 
+#announceWinner {
+    text-align: center;
+    font-size: 3rem;
+}
+
 #playArea {
     flex-grow: 1;
     display: grid;

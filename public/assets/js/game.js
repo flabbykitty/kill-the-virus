@@ -129,3 +129,13 @@ socket.on('stopTimer', (id) => {
         ? clearInterval(timer1)
         : clearInterval(timer2)
 })
+
+socket.on('announceWinner', () => {
+    if(document.querySelector('#player1Score').innerHTML > document.querySelector('#player2Score').innerHTML) {
+        document.querySelector('#announceWinner').innerHTML = 'You win!'
+    } else if (document.querySelector('#player1Score').innerHTML < document.querySelector('#player2Score').innerHTML) {
+        document.querySelector('#announceWinner').innerHTML = 'You lose...'
+    } else {
+        document.querySelector('#announceWinner').innerHTML = 'It\'s a tie!'
+    }
+})

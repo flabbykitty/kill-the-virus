@@ -92,6 +92,8 @@ const handleClicked = function() {
         if(game.rounds < 10) {
             delay = getRandomDelay()
             io.to(game.room).emit('startGame', delay, getRandomPosition(), getRandomPosition())
+        } else if (game.rounds === 10) {
+            io.to(game.room).emit('announceWinner')
         }
     }
 }
