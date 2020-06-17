@@ -48,7 +48,8 @@ const handleNewPlayer = function(username) {
             players,
             ready: 0,
             rounds: 0,
-            time: []
+            clicks: [],
+            time: {}
         }
 
         games.push(game)
@@ -77,13 +78,15 @@ const handleReady = function() {
 const handleClicked = function() {
     const game = games.find(id => id.players[this.id]);
 
-    game.time.push(this.id)
+    // Stop the timer for the other player
+    this.to(game.room).broadcast.emit('stopTimer')
 
-    if(game.time.length === 2) {
+    game.clicks.push(this.id)
 
+    if(game.clicks.length === 2) {
         io.to(game.room).emit('getPoint', this.id)
 
-        game.time = []
+        game.clicks = []
 
         game.rounds++
 

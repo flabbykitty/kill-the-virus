@@ -54,6 +54,10 @@
     margin-bottom: 0.5rem;
 }
 
+#loading {
+    margin-top: 2rem;
+}
+
 ::placeholder {
     color: white;
     opacity: 1;

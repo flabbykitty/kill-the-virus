@@ -2,8 +2,8 @@ let socket = io();
 
 const virusEl = document.querySelector('#virus');
 
-// let timer;
-// let newListItem;
+let newListItem1;
+let newListItem2;
 
 
 /**
@@ -11,14 +11,20 @@ const virusEl = document.querySelector('#virus');
  */
 
 
-
 const clickedFunction = () => {
-    // clearInterval(timer);
+    clearInterval(timer1);
 
     socket.emit('clicked');
 
     virusEl.removeEventListener('click', clickedFunction);
 }
+
+
+// const getOtherPlayersId = (obj) => {
+//     return Object.keys(obj).find(id => id != socket.id);
+// }
+
+
 /**
  * Event listeners
  */
@@ -27,6 +33,9 @@ const clickedFunction = () => {
 // Listen for when the player form is submited
 document.querySelector('#player-form').addEventListener('submit', e => {
     e.preventDefault();
+
+    //show a loading players thing
+    document.querySelector('#loading').classList.remove('hide')
     
     // Get the value from the input
     const username = document.querySelector('#username').value
@@ -73,18 +82,27 @@ socket.on('startGame', (delay, position1, position2) => {
     setTimeout(() => {
         virusEl.classList.remove('hide');
 
-        // let startTime = new Date().getTime()
+        let startTime = new Date().getTime()
 
-        // const ul = document.querySelector('#timer1')
-        // const li = document.createElement('LI')
-        // newListItem = ul.appendChild(li)
+        const ul1 = document.querySelector('#timer1')
+        const li1 = document.createElement('LI')
+        newListItem1 = ul1.appendChild(li1)
 
-        // timer = setInterval(() => {
-        //     let diff = moment(new Date().getTime()).diff(moment(startTime));
-        //     socket.emit('sendingTimes', diff)
+        const ul2 = document.querySelector('#timer2')
+        const li2 = document.createElement('LI')
+        newListItem2 = ul2.appendChild(li2)
+
+        timer1 = setInterval(() => {
+            let diff = moment(new Date().getTime()).diff(moment(startTime));
             
-        //     newListItem.innerHTML = moment(diff).format('mm:ss:SSS');
-        // }, 1) 
+            newListItem1.innerHTML = moment(diff).format('mm:ss:SSS');
+        }, 1) 
+
+        timer2 = setInterval(() => {
+            let diff = moment(new Date().getTime()).diff(moment(startTime));
+            
+            newListItem2.innerHTML = moment(diff).format('mm:ss:SSS');
+        }, 1) 
 
         virusEl.addEventListener('click', clickedFunction)
         
@@ -106,4 +124,8 @@ socket.on('getPoint', id => {
 
     // hide the virus
     virusEl.classList.add('hide')
+})
+
+socket.on('stopTimer', () =>{
+    clearInterval(timer2)
 })
