@@ -70,16 +70,15 @@ const handleReady = function() {
 
     if(game.ready === 2) {
         // start the game
-        delay = getRandomDelay()
-        io.to(game.room).emit('startGame', delay, getRandomPosition(), getRandomPosition())
+        io.to(game.room).emit('startGame', getRandomDelay(), getRandomPosition(), getRandomPosition())
     }
 }
 
 const handleClicked = function() {
     const game = games.find(id => id.players[this.id]);
 
-    // Stop the timer for the other player
-    this.to(game.room).broadcast.emit('stopTimer')
+    // Stop timer
+    io.to(game.room).emit('stopTimer', this.id)
 
     game.clicks.push(this.id)
 
@@ -112,5 +111,5 @@ module.exports = function(socket) {
 
     socket.on('ready', handleReady);
 
-    socket.on('clicked', handleClicked)
+    socket.on('clicked', handleClicked);
 }

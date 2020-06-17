@@ -81,7 +81,7 @@
 }
 
 #player1 h1, #player2 h1 {
-    margin-top: 2rem;
+    margin: 2rem 0;
 }
 
 #player1 button, #player2 button {
@@ -95,6 +95,14 @@
 #player1 button:hover, #player2 button:hover {
     background-color: #162B46;
     
+}
+
+#timer1, #timer2 {
+    list-style: none;
+}
+
+#timer1 li, #timer2 li {
+    margin-bottom: 0.5rem;
 }
 
 #gameArea {

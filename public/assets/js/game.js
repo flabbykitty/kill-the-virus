@@ -12,8 +12,6 @@ let newListItem2;
 
 
 const clickedFunction = () => {
-    clearInterval(timer1);
-
     socket.emit('clicked');
 
     virusEl.removeEventListener('click', clickedFunction);
@@ -82,15 +80,15 @@ socket.on('startGame', (delay, position1, position2) => {
     setTimeout(() => {
         virusEl.classList.remove('hide');
 
-        let startTime = new Date().getTime()
+        const startTime = new Date().getTime();
 
-        const ul1 = document.querySelector('#timer1')
-        const li1 = document.createElement('LI')
-        newListItem1 = ul1.appendChild(li1)
+        const ul1 = document.querySelector('#timer1');
+        const li1 = document.createElement('LI');
+        newListItem1 = ul1.appendChild(li1);
 
-        const ul2 = document.querySelector('#timer2')
-        const li2 = document.createElement('LI')
-        newListItem2 = ul2.appendChild(li2)
+        const ul2 = document.querySelector('#timer2');
+        const li2 = document.createElement('LI');
+        newListItem2 = ul2.appendChild(li2);
 
         timer1 = setInterval(() => {
             let diff = moment(new Date().getTime()).diff(moment(startTime));
@@ -107,7 +105,6 @@ socket.on('startGame', (delay, position1, position2) => {
         virusEl.addEventListener('click', clickedFunction)
         
     }, delay)
-
 })
 
 
@@ -126,6 +123,9 @@ socket.on('getPoint', id => {
     virusEl.classList.add('hide')
 })
 
-socket.on('stopTimer', () =>{
-    clearInterval(timer2)
+
+socket.on('stopTimer', (id) => {
+    id === socket.id
+        ? clearInterval(timer1)
+        : clearInterval(timer2)
 })
