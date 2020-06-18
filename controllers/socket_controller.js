@@ -17,7 +17,6 @@ let games = []
 //         },
 //         ready: 0,
 //         rounds: 0,
-//         time: null
 //     }
 // ]
 
@@ -49,7 +48,6 @@ const handleNewPlayer = function(username) {
             ready: 0,
             rounds: 0,
             clicks: [],
-            time: {}
         }
 
         games.push(game)

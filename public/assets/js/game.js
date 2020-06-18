@@ -7,7 +7,7 @@ let newListItem2;
 
 
 /**
- * Function
+ * Functions
  */
 
 
@@ -16,11 +16,6 @@ const clickedFunction = () => {
 
     virusEl.removeEventListener('click', clickedFunction);
 }
-
-
-// const getOtherPlayersId = (obj) => {
-//     return Object.keys(obj).find(id => id != socket.id);
-// }
 
 
 /**
@@ -68,9 +63,8 @@ socket.on('newGame', (players) => {
 
 
 socket.on('startGame', (delay, position1, position2) => {
-    //remove ready buttons
+    //remove ready button
     document.querySelector('#player1 button').classList.add('hide');
-    document.querySelector('#player2 button').classList.add('hide');
 
     // add the position to the virus
     virusEl.style.gridColumn = position1;
